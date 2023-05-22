@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/johnkramer1996/design-patterns-ts/issues"
   },
-  "homepage": "https://github.com/johnkramer1996/design-patterns-ts#readme"
+  "homepage": "https://github.com/johnkramer1996/design-patterns-ts#readme",
+  "dependencies": {
+    "@types/node": "^20.2.3"
+  }
 }
