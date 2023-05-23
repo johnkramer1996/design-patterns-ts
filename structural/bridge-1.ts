@@ -48,14 +48,26 @@ class SilbrigColor extends Color {
   }
 }
 
-const black = new BlackColor()
-const silbrig = new SilbrigColor()
-const bmwBlack = new Bmw(black)
-const bmwSilbrig = new Bmw(silbrig)
-const audiBlack = new Audi(black)
-const audiSilbrig = new Audi(black)
+class BridgeExample {
+  black: Color
+  silbrig: Color
+  constructor() {
+    this.black = new BlackColor()
+    this.silbrig = new SilbrigColor()
+    this.run()
+  }
 
-console.log(bmwBlack.paint())
-console.log(bmwSilbrig.paint())
-console.log(audiBlack.paint())
-console.log(audiSilbrig.paint())
+  run() {
+    const bmwBlack = new Bmw(this.black)
+    const bmwSilbrig = new Bmw(this.silbrig)
+    const audiBlack = new Audi(this.black)
+    const audiSilbrig = new Audi(this.silbrig)
+
+    console.log(bmwBlack.paint())
+    console.log(bmwSilbrig.paint())
+    console.log(audiBlack.paint())
+    console.log(audiSilbrig.paint())
+  }
+}
+
+new BridgeExample()

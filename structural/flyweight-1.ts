@@ -1,11 +1,3 @@
-// https://github.com/gztchan/design-patterns-in-typescript/blob/master/flyweight/flyweight.ts
-
-// https://github.com/nicola-bovolato/design-patterns-typescript/tree/master/structural/flyweight
-
-// https://sbcode.net/typescript/flyweight/
-
-// любой фабрика которая хранит кэш
-
 class CloudFactory {
   private static cloudTypes: Map<string, CloudType> = new Map()
 
@@ -20,8 +12,7 @@ class CloudFactory {
     return found
   }
 
-  static getInstances(): number {
-    for (const item in this.cloudTypes) console.log(item)
+  static getInstancesSize(): number {
     return this.cloudTypes.size
   }
 }
@@ -84,7 +75,7 @@ class FlyweightExample {
   run(): void {
     this.sky.rain()
 
-    console.log(`Cloud type instances: ${CloudFactory.getInstances()}`)
+    console.log(`Cloud type instances: ${CloudFactory.getInstancesSize()}`)
   }
 }
 

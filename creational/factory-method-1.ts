@@ -118,15 +118,39 @@ class LatteCoffeeFactory extends CoffeeFactory {
   }
 }
 
-const getCoffee = (type: CoffeeType, coffeeSize: CoffeeSize): Coffee => {
-  const factory = new [AmericanoCoffeeFactory, CappuccinoCoffeeFactory][type]()
+class FactoryMethodExample {
+  factory: CoffeeFactory
+  coffee: Coffee
 
-  return factory.create(coffeeSize)
+  constructor() {
+    for (let type of Object.values(CoffeeType)) {
+      if (typeof type === 'string') continue
+      this.factory = this.configure(type)
+      for (let size of Object.values(CoffeeSize)) {
+        if (typeof size === 'string') continue
+        this.coffee = this.factory.create(size)
+        this.run()
+      }
+    }
+  }
+
+  private configure(type: CoffeeType): CoffeeFactory {
+    const factory = new [
+      AmericanoCoffeeFactory,
+      CappuccinoCoffeeFactory,
+      EspressoCoffeeFactory,
+      LatteCoffeeFactory,
+    ][type]()
+
+    return factory
+  }
+
+  private run(): void {
+    this.coffee.grindCoffee()
+    this.coffee.makeCoffee()
+    this.coffee.pourIntoCup()
+    this.coffee.getPrice()
+  }
 }
 
-const coffee: Coffee = getCoffee(CoffeeType.ESPRESSO, CoffeeSize.LG)
-
-coffee.grindCoffee()
-coffee.makeCoffee()
-coffee.pourIntoCup()
-coffee.getPrice()
+new FactoryMethodExample()
