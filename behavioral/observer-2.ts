@@ -1,26 +1,26 @@
-interface Subscriber {
+interface ISubscriber {
   update(message: string): void
 }
 
-class RadioListener implements Subscriber {
+class RadioListener implements ISubscriber {
   update(message: string): void {
     console.log(`New Broadcast received: '${message}'`)
   }
 }
 
 class RadioStation {
-  private listeners: Subscriber[] = []
+  private listeners: ISubscriber[] = []
 
-  subscribe(listener: Subscriber): void {
+  subscribe(listener: ISubscriber): void {
     this.listeners.push(listener)
   }
 
-  unsubscribe(listener: Subscriber): void {
+  unsubscribe(listener: ISubscriber): void {
     this.listeners = this.listeners.filter((_listener) => listener !== _listener)
   }
 
   broadcast(message: string): void {
-    this.listeners.forEach((listener: Subscriber) => listener.update(message))
+    this.listeners.forEach((listener: ISubscriber) => listener.update(message))
   }
 }
 
