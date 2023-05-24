@@ -78,52 +78,45 @@ class StockMediator implements Mediator {
     newColleague.setCollCode(this.colleagueCodes)
   }
 
-  public saleOffer(stock: string, shares: number, collCode: number) {
-    for (let i = 0; i < this.stockBuyOffers.length; i++) {
-      const offer = this.stockBuyOffers[i]
-      if (offer.getStockSymbol() == stock && offer.getstockShares() == shares) {
-        console.log(
-          shares + ' shares of ' + stock + ' sold to colleague code ' + offer.getCollCode(),
-        )
-
-        this.stockBuyOffers.splice(i, 1)
-
-        return
-      }
-    }
+  saleOffer(stock: string, shares: number, collCode: number) {
+    if (this.deleteOffer(this.stockBuyOffers, stock, shares)) return
 
     console.log(shares + ' shares of ' + stock + ' added to inventory')
     this.stockSaleOffers.push(new StockOffer(shares, stock, collCode))
   }
 
   buyOffer(stock: string, shares: number, collCode: number) {
-    for (let i = 0; i < this.stockSaleOffers.length; i++) {
-      const offer = this.stockSaleOffers[i]
+    if (this.deleteOffer(this.stockSaleOffers, stock, shares)) return
+
+    console.log(shares + ' shares of ' + stock + ' added to inventory')
+    this.stockBuyOffers.push(new StockOffer(shares, stock, collCode))
+  }
+
+  deleteOffer(stockOffers: StockOffer[], stock: string, shares: number): boolean {
+    for (let i = 0; i < stockOffers.length; i++) {
+      const offer = stockOffers[i]
       if (offer.getStockSymbol() == stock && offer.getstockShares() == shares) {
         console.log(
           shares + ' shares of ' + stock + ' bought by colleague code ' + offer.getCollCode(),
         )
 
-        this.stockSaleOffers.splice(i, 1)
-        return
+        return !!this.stockBuyOffers.splice(i, 1)
       }
     }
-    console.log(shares + ' shares of ' + stock + ' added to inventory')
-    this.stockBuyOffers.push(new StockOffer(shares, stock, collCode))
+    return false
   }
 
-  getstockOfferings() {
+  getStockOfferings() {
     console.log('Stocks for Sale')
-
-    for (const offer of this.stockSaleOffers) {
-      console.log(offer.getstockShares() + ' of ' + offer.getStockSymbol())
-    }
+    this.getStockOffering(this.stockSaleOffers)
 
     console.log('Stock Buy Offers')
+    this.getStockOffering(this.stockBuyOffers)
+  }
 
-    for (const offer of this.stockBuyOffers) {
+  getStockOffering(stockOffers: StockOffer[]) {
+    for (const offer of stockOffers)
       console.log(offer.getstockShares() + ' of ' + offer.getStockSymbol())
-    }
   }
 }
 
@@ -141,7 +134,7 @@ class ExampleMediator {
 
     broker.buyOffer('NRG', 10)
 
-    nyse.getstockOfferings()
+    nyse.getStockOfferings()
   }
 }
 
