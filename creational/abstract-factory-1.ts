@@ -1,5 +1,3 @@
-// https://habr.com/en/post/465835/
-
 interface Sedan {
   run(): string
 }

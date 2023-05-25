@@ -41,7 +41,6 @@ class SmallCase implements Case {
     console.log('Small Case')
   }
 }
-
 class StandardMonitor implements Monitor {
   resolution: number = 1440
   size: number = 27

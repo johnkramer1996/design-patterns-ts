@@ -64,5 +64,16 @@ class BigChair extends Chair {
   }
 }
 
-const chair = ChairFactory.getChair(TypeChar.BIG)
-console.log(chair.getDimensions())
+class FactoryMethodExample {
+  constructor() {
+    this.run(ChairFactory.getChair(TypeChar.SMALL))
+    this.run(ChairFactory.getChair(TypeChar.MEDIUM))
+    this.run(ChairFactory.getChair(TypeChar.BIG))
+  }
+
+  private run(chair: Chair): void {
+    console.log(chair.getDimensions())
+  }
+}
+
+new FactoryMethodExample()

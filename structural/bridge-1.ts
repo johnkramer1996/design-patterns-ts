@@ -1,4 +1,8 @@
-class Model {
+interface IAbstraction {
+  paint(): void
+}
+
+class Model implements IAbstraction {
   color: Color
   name: string
 
@@ -24,7 +28,11 @@ class Bmw extends Model {
   }
 }
 
-class Color {
+interface IImplementer {
+  get(): string
+}
+
+class Color implements IImplementer {
   type: string
 
   constructor(type: string) {
@@ -51,6 +59,7 @@ class SilbrigColor extends Color {
 class BridgeExample {
   black: Color
   silbrig: Color
+
   constructor() {
     this.black = new BlackColor()
     this.silbrig = new SilbrigColor()

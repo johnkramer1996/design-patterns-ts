@@ -1,9 +1,9 @@
 // https://www.tutorialspoint.com/design_pattern/proxy_pattern.htm - создание обьекта при вывове метода
-interface Image {
+interface IImage {
   display(): void
 }
 
-class RealImage implements Image {
+class RealImage implements IImage {
   private fileName: string
 
   constructor(fileName: string) {
@@ -20,7 +20,7 @@ class RealImage implements Image {
   }
 }
 
-class ProxyLazyImage implements Image {
+class ProxyLazyImage implements IImage {
   private realImage: RealImage
   private fileName: string
 
@@ -40,7 +40,7 @@ class ProxyExample {
   }
 
   run(): void {
-    const image: Image = new ProxyLazyImage('test_10mb.jpg')
+    const image: IImage = new ProxyLazyImage('test_10mb.jpg')
     image.display()
     image.display()
   }

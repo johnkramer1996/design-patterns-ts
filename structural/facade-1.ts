@@ -105,11 +105,25 @@ class HomeTheaterFacade {
   }
 }
 
-const bluray = new BlurayPlayer()
-const amp = new Amplifier()
-const lights = new Lights()
-const tv = new TV()
-const popcornMaker = new PopcornMaker()
+class FacadeExample {
+  bluray = new BlurayPlayer()
+  amp = new Amplifier()
+  lights = new Lights()
+  tv = new TV()
+  popcornMaker = new PopcornMaker()
+  hometheater = new HomeTheaterFacade(
+    this.amp,
+    this.bluray,
+    this.lights,
+    this.tv,
+    this.popcornMaker,
+  )
 
-const hometheater = new HomeTheaterFacade(amp, bluray, lights, tv, popcornMaker)
-hometheater.watchMovie()
+  constructor() {}
+
+  run(): void {
+    this.hometheater.watchMovie()
+  }
+}
+
+new FacadeExample()
